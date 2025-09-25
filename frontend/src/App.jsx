@@ -136,7 +136,7 @@ function AppContent() {
 
       {currentScreen === 'dashboard' && <Dashboard />}
 
-      {/* Static Sections */}
+  
       
 
       {/* Auth Modal */}
@@ -145,6 +145,9 @@ function AppContent() {
         onClose={handleCloseModal}
         onAuthSuccess={handleAuthSuccess}
       />
+
+ 
+
     </div>
   );
 }
