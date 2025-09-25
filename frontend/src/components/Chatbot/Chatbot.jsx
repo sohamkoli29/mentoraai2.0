@@ -30,7 +30,7 @@ const Chatbot = () => {
 
     try {
       const res = await axios.post(
-        "http://127.0.0.1:5000/chat",
+        "http://127.0.0.1:8000/chat",
         { message: userMessage },
         { 
           headers: { 
@@ -114,7 +114,8 @@ const Chatbot = () => {
               )}
               <div style={{ 
                 fontSize: "14px", 
-                lineHeight: "1.4" 
+                lineHeight: "1.4",
+                  whiteSpace: "pre-line"   
               }}>
                 {msg.text}
               </div>
@@ -167,7 +168,7 @@ const Chatbot = () => {
             value={input}
             onChange={e => setInput(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder="Ask me about career paths, skills, education, job markets..."
+            placeholder="Ask me about career paths, skills, education, job markets...      (type 'bye' to end session)"
             style={{
               flex: 1,
               padding: "12px 16px",
