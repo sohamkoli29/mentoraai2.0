@@ -27,3 +27,8 @@ Thumbs.db
 # If you want to keep lock files, remove these lines
 package-lock.json
 yarn.lock
+
+
+#chhatbot enviornment
+venv/
+chatbot/ai-chatbot/
