@@ -1,0 +1,29 @@
+# === Node.js (backend & frontend) ===
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# === Build output (frontend) ===
+dist/
+build/
+
+# === Environment files ===
+frontend/.env
+backend/.env
+frontend/.env.*
+backend/.env.*
+
+# === Logs ===
+*.log
+
+# === OS / Editor files ===
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# === Misc ===
+# If you want to keep lock files, remove these lines
+package-lock.json
+yarn.lock
