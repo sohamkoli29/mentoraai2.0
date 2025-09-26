@@ -1,5 +1,4 @@
-// Alternative version with modern back button
-import React from "react";
+
 import { useNavigate } from "react-router-dom";
 import Chatbot from "../../components/Chatbot/Chatbot";
 

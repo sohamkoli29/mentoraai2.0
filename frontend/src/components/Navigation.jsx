@@ -1,4 +1,4 @@
-import React from 'react';
+
 import {Student } from "@phosphor-icons/react";
 
 const Navigation = ({ onScreenChange }) => {

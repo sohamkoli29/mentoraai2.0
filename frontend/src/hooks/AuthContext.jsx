@@ -1,5 +1,5 @@
 // AuthContext.jsx - Context Provider Component
-import React, { useState, useEffect, createContext } from 'react';
+import  { useState, useEffect, createContext } from 'react';
 
 export const AuthContext = createContext();
 
@@ -9,7 +9,7 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useState(localStorage.getItem('authToken'));
 
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+  const API_URL = import.meta.env.VITE_API_URL ;
 
   // Check if user is authenticated on app load
   useEffect(() => {

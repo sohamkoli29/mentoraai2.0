@@ -1,7 +1,7 @@
-  import React, { useState } from "react";
+
   import { ArrowRight, BookOpen, Award, Target, CheckCircle, Star } from 'lucide-react';
   import StartJourneyButton from "./StartJourneyButton";
-  import { useNavigate } from "react-router-dom";
+ 
   const Dashboard = ({ assessmentData, onStartAssessment, onScreenChange }) => {
     
 

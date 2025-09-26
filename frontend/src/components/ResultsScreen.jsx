@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { CheckCircle, Star, ArrowRight, RefreshCw, TrendingUp, Award, Target, BarChart3, Sparkles } from 'lucide-react';
 
 const ResultsScreen = ({ assessmentData, currentAssessment, onScreenChange, onResetAssessment, onStartNextAssessment }) => {

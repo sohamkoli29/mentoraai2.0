@@ -1,6 +1,5 @@
 // src/App.jsx
-import React from "react";
-import {  Router, Routes, Route } from "react-router-dom";
+import {   Routes, Route } from "react-router-dom";
 import App from "./App"; // your home page
 import ChatbotPage from "./pages/ChatbotPage/ChatbotPage";
 

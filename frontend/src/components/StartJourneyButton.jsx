@@ -1,8 +1,8 @@
-import React, { useState, useContext } from "react";
+import  { useState, useContext } from "react";
 import AuthModal from "./AuthModal/AuthModal";
 import { ArrowRight } from "lucide-react";
 import { AuthContext } from "../hooks/AuthContext";
-import { useNavigate } from "react-router-dom"; 
+ 
 
 
 

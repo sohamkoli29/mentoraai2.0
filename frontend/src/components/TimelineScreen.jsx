@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Clock, Calendar, CheckCircle, AlertCircle, ArrowLeft, Download, Bell } from 'lucide-react';
 
 const TimelineScreen = ({ selectedCollege, onScreenChange }) => {

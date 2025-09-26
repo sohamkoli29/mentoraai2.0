@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { MapPin, Star, Users, DollarSign, TrendingUp, Search, Filter, Clock, Award, Building } from 'lucide-react';
 
 const CollegeSearch = ({ assessmentData, onCollegeSelect, onScreenChange }) => {

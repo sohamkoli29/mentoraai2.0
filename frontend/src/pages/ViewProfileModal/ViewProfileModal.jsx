@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { X, User, GraduationCap, Target, Award, Briefcase, Edit, Calendar, MapPin, Phone, Mail } from 'lucide-react';
+import  { useState, useEffect } from 'react';
+import { X, User, GraduationCap, Target,  Edit, Calendar, MapPin, Phone,  } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import './ViewProfileModal.css';
 

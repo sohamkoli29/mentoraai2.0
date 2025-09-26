@@ -1,5 +1,5 @@
 // AuthModal.jsx
-import React, { useState, useContext } from 'react';
+import  { useState, useContext } from 'react';
 import { X, Mail, Lock, User, Eye, EyeOff } from 'lucide-react';
 import { AuthContext } from '../../hooks/AuthContext';   // ⬅️ import context
 import './AuthModal.css';

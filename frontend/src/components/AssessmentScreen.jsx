@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { ChevronRight, ArrowLeft, Brain, MessageSquare } from 'lucide-react';
 
 const AssessmentScreen = ({ 
