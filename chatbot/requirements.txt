@@ -1,8 +1,8 @@
-Flask==2.3.3
-flask-cors==4.0.0
-numpy==1.25.2
-scikit-learn==1.2.2
-spacy==3.5.3
+Flask
+flask-cors
+numpy
+scikit-learn
+spacy
 gunicorn
 
 # Prebuilt English model (avoids building from source)
