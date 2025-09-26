@@ -2,7 +2,6 @@ Flask
 flask-cors
 numpy
 scikit-learn
-gunicorn
 spacy==3.5.4
 thinc==8.2.2
 blis==0.7.9
