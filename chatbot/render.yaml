@@ -2,8 +2,7 @@ services:
   - type: web
     name: chatbot
     env: python
-    plan: free
-    rootDirectory: chatbot        # <-- points to your app folder
+    plan: free      
     buildCommand: pip install --upgrade pip setuptools wheel && pip install -r requirements.txt
     startCommand: gunicorn chat:app
     autoDeploy: true
