@@ -38,7 +38,7 @@ function Navbar({ onLoginClick }) {
         <div className="navLinks">
           <a href="#home">Home</a>
           {user && <a href="#dashboard">Dashboard</a>}
-          <a href="#about">About</a>
+          <a href="#chatbot">Chatbot</a>
           
           <a href="#contact">Contact</a>  
         </div>
