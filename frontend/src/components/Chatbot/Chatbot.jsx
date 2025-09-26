@@ -2,6 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import './Chatbot.css';
 
+
+
+const API_URL = import.meta.env.VITE_CHATBOT_URL
 const Chatbot = () => {
   const [messages, setMessages] = useState([
     { sender: "bot", text: "Hello! I'm your career guidance assistant. Tell me about your interests, skills, or career goals!" }
@@ -30,7 +33,7 @@ const Chatbot = () => {
 
     try {
       const res = await axios.post(
-        "http://127.0.0.1:8000/chat",
+        `${API_URL}/chat`,
         { message: userMessage },
         { 
           headers: { 
