@@ -51,8 +51,8 @@ function Contact() {
                 <Mail />
                 <div className="contact-info-content">
                   <h3>Email Us</h3>
+                  <p>soham.koli23@pcu.edu.in</p>
                   <p>support@mentoraai.com</p>
-                  <p>hello@mentoraai.com</p>
                 </div>
               </div>
             </div>
@@ -62,7 +62,7 @@ function Contact() {
                 <Phone />
                 <div className="contact-info-content">
                   <h3>Call Us</h3>
-                  <p>+91 98765 43210</p>
+                  <p>+91 7058260905</p>
                   <p>Mon - Fri: 9AM - 6PM IST</p>
                 </div>
               </div>
@@ -73,8 +73,8 @@ function Contact() {
                 <MapPin />
                 <div className="contact-info-content">
                   <h3>Visit Us</h3>
-                  <p>123 Education Hub</p>
-                  <p>Pune, Maharashtra 411001</p>
+                  <p>Pimpri Chinchwad University</p>
+                  <p>Pune, Maharashtra 410106</p>
                 </div>
               </div>
             </div>
