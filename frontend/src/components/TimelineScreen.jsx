@@ -1,9 +1,18 @@
 import  { useState } from 'react';
 import { Clock, Calendar, CheckCircle, AlertCircle, ArrowLeft, Download, Bell } from 'lucide-react';
-
-const TimelineScreen = ({ selectedCollege, onScreenChange }) => {
+import { useNavigate } from 'react-router-dom';
+const TimelineScreen = ({ selectedCollege}) => {
   const [notifications, setNotifications] = useState(true);
 
+
+   const navigate = useNavigate();
+
+     const handleFindColleges = () => {
+    navigate('/colleges');
+  };
+     const handleHome = () => {
+    navigate('/');
+  };
   // Mock admission timeline data
   const admissionTimeline = [
     { 
@@ -104,7 +113,7 @@ const TimelineScreen = ({ selectedCollege, onScreenChange }) => {
       <div className="mb-8">
         <div className="flex items-center space-x-3 mb-4">
           <button
-            onClick={() => onScreenChange('colleges')}
+            onClick={handleFindColleges}
             className="p-2 text-gray-500 hover:text-purple-600 transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
@@ -254,7 +263,7 @@ const TimelineScreen = ({ selectedCollege, onScreenChange }) => {
         </button>
         
         <button 
-          onClick={() => onScreenChange('home')}
+          onClick={handleHome}
           className="bg-white border-2 border-purple-600 text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-purple-50 transition-all duration-200"
         >
           Back to Dashboard

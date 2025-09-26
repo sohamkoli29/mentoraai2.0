@@ -310,7 +310,7 @@
   overflow: hidden;
   animation: formSlideIn 0.8s ease-out 0.4s both;
   height: fit-content;
-    border: 1px solid black;
+    
 }
 
 @keyframes formSlideIn {

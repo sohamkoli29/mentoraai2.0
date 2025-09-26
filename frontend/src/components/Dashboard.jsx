@@ -1,10 +1,14 @@
 
   import { ArrowRight, BookOpen, Award, Target, CheckCircle, Star } from 'lucide-react';
   import StartJourneyButton from "./StartJourneyButton";
- 
-  const Dashboard = ({ assessmentData, onStartAssessment, onScreenChange }) => {
-    
-
+ import { useNavigate } from 'react-router-dom';
+ import { useAuth } from '../hooks/useAuth';
+  const Dashboard = ({ assessmentData, onStartAssessment}) => {
+      const { user } = useAuth();
+        const navigate = useNavigate();
+        const handleFindColleges = () => {
+    navigate('/colleges');
+  };
     // function to start assessment
   const handleStartAssessment = (type) => { 
     console.log('Starting assessment:', type); 
@@ -28,8 +32,9 @@
 
     
         </div>
-
+        
         {/* Assessment Progress */}
+        {user &&
         <div className="glass  rounded-2xl p-8 mb-12 border border-purple-100 animate-slide-in-right">
           <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">Your Assessment Journey</h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -121,6 +126,7 @@
             </div>
           </div>
         </div>
+        }
 
         {/* Next Steps */}
         {assessmentData.specialization && (
@@ -131,7 +137,7 @@
                 Great! You've completed all assessments. Now let's find the perfect colleges for your chosen path.
               </p>
               <button 
-                onClick={() => onScreenChange('colleges')}
+                onClick={handleFindColleges}
                 className="bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-3 rounded-xl text-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-200 inline-flex items-center space-x-2"
               >
                 <span>Find Colleges</span>

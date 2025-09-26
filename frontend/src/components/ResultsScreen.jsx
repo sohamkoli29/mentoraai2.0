@@ -1,7 +1,14 @@
-
 import { CheckCircle, Star, ArrowRight, RefreshCw, TrendingUp, Award, Target, BarChart3, Sparkles } from 'lucide-react';
 
-const ResultsScreen = ({ assessmentData, currentAssessment, onScreenChange, onResetAssessment, onStartNextAssessment }) => {
+const ResultsScreen = ({ 
+  assessmentData, 
+  currentAssessment, 
+  nextAssessment,
+  onScreenChange, 
+  onResetAssessment, 
+  onStartNextAssessment,
+  onGoToDashboard
+}) => {
   const result = assessmentData[currentAssessment];
 
   if (!result) {
@@ -11,7 +18,7 @@ const ResultsScreen = ({ assessmentData, currentAssessment, onScreenChange, onRe
           <h2 className="text-xl font-semibold text-gray-900 mb-4">No results available</h2>
           <p className="text-gray-600 mb-4">It seems there was an issue processing your assessment.</p>
           <button 
-            onClick={() => onScreenChange('home')}
+            onClick={onGoToDashboard}
             className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-200"
           >
             Return to Home
@@ -30,12 +37,6 @@ const ResultsScreen = ({ assessmentData, currentAssessment, onScreenChange, onRe
     }
   };
 
-  const getNextStep = () => {
-    if (currentAssessment === 'stream' && !assessmentData.degree) return 'degree';
-    if (currentAssessment === 'degree' && !assessmentData.specialization) return 'specialization';
-    return null;
-  };
-
   const getScoreColor = (score) => {
     if (score >= 80) return 'text-green-600 bg-green-100 border-green-200';
     if (score >= 60) return 'text-blue-600 bg-blue-100 border-blue-200';
@@ -48,6 +49,40 @@ const ResultsScreen = ({ assessmentData, currentAssessment, onScreenChange, onRe
     if (score >= 60) return 'Good Match';
     if (score >= 40) return 'Moderate Match';
     return 'Consider Alternatives';
+  };
+
+  // Determine what button to show based on next assessment
+  const getActionButton = () => {
+    if (nextAssessment) {
+      return (
+        <button 
+          onClick={onStartNextAssessment}
+          className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-200 flex items-center justify-center space-x-2 transform hover:scale-105"
+        >
+          <span>Continue to {nextAssessment.charAt(0).toUpperCase() + nextAssessment.slice(1)} Assessment</span>
+          <ArrowRight className="w-5 h-5" />
+        </button>
+      );
+    } else if (assessmentData.specialization) {
+      return (
+        <button 
+          onClick={() => onScreenChange('colleges')}
+          className="bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-200 flex items-center justify-center space-x-2 transform hover:scale-105"
+        >
+          <span>Find Perfect Colleges</span>
+          <ArrowRight className="w-5 h-5" />
+        </button>
+      );
+    } else {
+      return (
+        <button 
+          onClick={onGoToDashboard}
+          className="bg-white border-2 border-purple-600 text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-purple-50 transition-all duration-200 flex items-center justify-center space-x-2"
+        >
+          <span>Back to Dashboard</span>
+        </button>
+      );
+    }
   };
 
   return (
@@ -249,35 +284,8 @@ const ResultsScreen = ({ assessmentData, currentAssessment, onScreenChange, onRe
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4 mb-6">
-          {getNextStep() && (
-            <button 
-              onClick={() => {
-                onStartNextAssessment(getNextStep());
-              }}
-              className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-200 flex items-center justify-center space-x-2 transform hover:scale-105"
-            >
-              <span>Continue to {getNextStep().charAt(0).toUpperCase() + getNextStep().slice(1)} Assessment</span>
-              <ArrowRight className="w-5 h-5" />
-            </button>
-          )}
+          {getActionButton()}
           
-          {!getNextStep() && assessmentData.specialization && (
-            <button 
-              onClick={() => onScreenChange('colleges')}
-              className="bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-200 flex items-center justify-center space-x-2 transform hover:scale-105"
-            >
-              <span>Find Perfect Colleges</span>
-              <ArrowRight className="w-5 h-5" />
-            </button>
-          )}
-
-          <button 
-            onClick={() => onScreenChange('home')}
-            className="bg-white border-2 border-purple-600 text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-purple-50 transition-all duration-200 flex items-center justify-center space-x-2"
-          >
-            <span>Back to Dashboard</span>
-          </button>
-
           <button 
             onClick={() => {
               if (window.confirm('Are you sure you want to retake this assessment? Your current results will be lost.')) {
@@ -335,7 +343,7 @@ const ResultsScreen = ({ assessmentData, currentAssessment, onScreenChange, onRe
         </div>
 
         {/* Next Steps Guide */}
-        {getNextStep() && (
+        {nextAssessment && (
           <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
             <div className="flex items-start space-x-3">
               <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -344,8 +352,23 @@ const ResultsScreen = ({ assessmentData, currentAssessment, onScreenChange, onRe
               <div>
                 <h4 className="font-semibold text-blue-900 mb-1">What's Next?</h4>
                 <p className="text-sm text-blue-700">
-                  Complete your <strong>{getNextStep()}</strong> assessment to get comprehensive career guidance. 
+                  Complete your <strong>{nextAssessment}</strong> assessment to get comprehensive career guidance. 
                   Each assessment builds upon your previous responses for more accurate recommendations.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Completion Message */}
+        {!nextAssessment && assessmentData.specialization && (
+          <div className="mt-6 p-4 bg-green-50 rounded-lg border border-green-200">
+            <div className="flex items-start space-x-3">
+              <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" />
+              <div>
+                <h4 className="font-semibold text-green-900 mb-1">Congratulations! 🎉</h4>
+                <p className="text-sm text-green-700">
+                  You've completed all assessments! Now you can explore colleges that match your chosen specialization.
                 </p>
               </div>
             </div>

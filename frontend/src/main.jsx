@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom'; // ✅ import BrowserRouter
-import App1 from './App1.jsx';
+import App from './App.jsx';
 import './index.css';
 import FloatingChatButton   from "./components/FloatingChatButton/FloatingChatButton";
 
@@ -9,7 +9,7 @@ import FloatingChatButton   from "./components/FloatingChatButton/FloatingChatBu
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <App1 />
+      <App />
       <FloatingChatButton/>
     </BrowserRouter>
   </React.StrictMode>

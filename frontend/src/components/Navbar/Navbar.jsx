@@ -40,7 +40,7 @@ function Navbar({ onLoginClick }) {
           {user && <a href="#dashboard">Dashboard</a>}
           <a href="#about">About</a>
           
-          <a href="#contact">Contact</a>
+          <a href="#contact">Contact</a>  
         </div>
         <div className="navLogin">
           {user ? (

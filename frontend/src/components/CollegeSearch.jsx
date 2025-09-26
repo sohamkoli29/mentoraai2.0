@@ -1,13 +1,22 @@
 import { useState, useEffect } from 'react';
 import { MapPin, Star, Users, DollarSign, TrendingUp, Search, Filter, Clock, Award, Building } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-const CollegeSearch = ({ assessmentData, onCollegeSelect, onScreenChange }) => {
+
+const CollegeSearch = ({ assessmentData, onCollegeSelect }) => {
   const [selectedCity, setSelectedCity] = useState('');
   const [colleges, setColleges] = useState([]);
   const [loading, setLoading] = useState(false);
   const [sortBy, setSortBy] = useState('ranking');
   const [filterBy, setFilterBy] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+
+   const navigate = useNavigate();
+
+   const handleHome = () => {
+    navigate('/');
+  };
+
 
   const cities = [
     'Mumbai', 'Delhi', 'Bangalore', 'Chennai', 'Kolkata', 
@@ -612,7 +621,7 @@ const CollegeSearch = ({ assessmentData, onCollegeSelect, onScreenChange }) => {
           </p>
           {!assessmentData.specialization ? (
             <button 
-              onClick={() => onScreenChange('home')}
+              onClick={handleHome}
               className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:shadow-lg transition-all duration-200"
             >
               Complete Assessments First →

@@ -1,4 +1,3 @@
-
 import { ChevronRight, ArrowLeft, Brain, MessageSquare } from 'lucide-react';
 
 const AssessmentScreen = ({ 
@@ -8,7 +7,8 @@ const AssessmentScreen = ({
   userInput, 
   setUserInput, 
   onAnswerSubmit, 
-  onScreenChange 
+  onScreenChange,
+  assessmentData  
 }) => {
   if (!currentQuestions || currentQuestions.length === 0) {
     return (
@@ -24,6 +24,16 @@ const AssessmentScreen = ({
 
   const currentQuestion = currentQuestions[questionIndex];
 
+  // Get assessment title for display
+  const getAssessmentTitle = (type) => {
+    const titles = {
+      'stream': 'Stream Selection Assessment',
+      'degree': 'Degree Planning Assessment', 
+      'specialization': 'Specialization Assessment'
+    };
+    return titles[type] || 'Career Assessment';
+  };
+
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
       <div className="glass rounded-2xl p-8 border border-purple-100 animate-fade-in-up">
@@ -37,9 +47,16 @@ const AssessmentScreen = ({
               >
                 <ArrowLeft className="w-5 h-5" />
               </button>
-              <h2 className="text-2xl font-bold text-gray-900">
-                {currentAssessment.charAt(0).toUpperCase() + currentAssessment.slice(1)} Assessment
-              </h2>
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900">
+                  {getAssessmentTitle(currentAssessment)}
+                </h2>
+                <p className="text-sm text-gray-600 mt-1">
+                  {currentAssessment === 'stream' && 'Discover your ideal academic stream'}
+                  {currentAssessment === 'degree' && 'Find your perfect degree program'}
+                  {currentAssessment === 'specialization' && 'Choose your area of expertise'}
+                </p>
+              </div>
             </div>
             <span className="text-sm text-gray-600 bg-white px-3 py-1 rounded-full">
               Question {questionIndex + 1} of {currentQuestions.length}
@@ -174,6 +191,26 @@ const AssessmentScreen = ({
           <p className="text-sm text-blue-700">
             💡 <strong>Tip:</strong> Be honest and detailed in your responses. Our AI learns from your answers to provide better recommendations.
           </p>
+        </div>
+
+        {/* Assessment Progress Indicator */}
+        <div className="mt-6 p-4 bg-purple-50 rounded-lg border border-purple-200">
+          <div className="flex items-center justify-between text-sm">
+            <span className="font-medium text-purple-800">Assessment Progress:</span>
+            <div className="flex space-x-2">
+              <span className={`px-2 py-1 rounded-full text-xs ${
+                currentAssessment === 'stream' ? 'bg-purple-600 text-white' : 'bg-white text-purple-600'
+              }`}>Stream</span>
+              <span className={`px-2 py-1 rounded-full text-xs ${
+                currentAssessment === 'degree' ? 'bg-purple-600 text-white' : 
+                assessmentData.stream ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-400'
+              }`}>Degree</span>
+              <span className={`px-2 py-1 rounded-full text-xs ${
+                currentAssessment === 'specialization' ? 'bg-purple-600 text-white' : 
+                assessmentData.degree ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-400'
+              }`}>Specialization</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

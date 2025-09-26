@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { generateDynamicQuestions, analyzeAnswers } from '../utils/questionGenerator';
 
-const useAssessment = (setCurrentScreen) => {
+const useAssessment = (navigate) => {
   const [assessmentData, setAssessmentData] = useState({
     stream: null,
     degree: null,
@@ -15,7 +15,6 @@ const useAssessment = (setCurrentScreen) => {
   const [currentQuestions, setCurrentQuestions] = useState([]);
   const [completedAssessment, setCompletedAssessment] = useState(null);
 
-  // Generate questions when assessment starts
   useEffect(() => {
     if (currentAssessment) {
       console.log('Generating questions for:', currentAssessment);
@@ -23,7 +22,7 @@ const useAssessment = (setCurrentScreen) => {
       setCurrentQuestions(questions);
       console.log('Generated questions:', questions);
     }
-  }, [currentAssessment]);
+  }, [currentAssessment, answers]);
 
   const startAssessment = (type) => {
     console.log('Starting assessment:', type);
@@ -34,7 +33,8 @@ const useAssessment = (setCurrentScreen) => {
     setCompletedAssessment(null);
   };
 
-  const handleAnswerSubmit = () => {
+  // Modified to accept completion callback
+  const handleAnswerSubmit = (onComplete) => {
     if (!userInput.trim() && currentQuestions[questionIndex]?.type !== 'scale') {
       alert('Please provide an answer before continuing.');
       return;
@@ -51,35 +51,28 @@ const useAssessment = (setCurrentScreen) => {
     setAnswers(newAnswers);
     setUserInput('');
 
-    console.log('Answer submitted:', newAnswer);
-    console.log('All answers so far:', newAnswers);
-
     if (questionIndex < currentQuestions.length - 1) {
-      // Move to next question
       setQuestionIndex(questionIndex + 1);
     } else {
-      // Assessment complete, analyze results
       console.log('Assessment complete, analyzing results...');
       const result = analyzeAnswers(currentAssessment, newAnswers);
       console.log('Analysis result:', result);
       
-      // Store the result
       setAssessmentData(prev => {
         const updated = { ...prev, [currentAssessment]: result };
-        console.log('Updated assessment data:', updated);
         return updated;
       });
       
-      // Store completed assessment for results screen
       setCompletedAssessment(currentAssessment);
-      
-      // Reset assessment state
       setQuestionIndex(0);
       setAnswers([]);
-      setCurrentAssessment(null);
       
-      // Navigate to results screen
-      setCurrentScreen('results');
+      // Call the completion callback with the completed assessment type
+      if (onComplete) {
+        onComplete(currentAssessment);
+      }
+      
+      setCurrentAssessment(null);
     }
   };
 
@@ -100,7 +93,6 @@ const useAssessment = (setCurrentScreen) => {
     resetAssessment();
   };
 
-  // Function to get user's complete profile for database storage
   const getUserProfile = () => {
     return {
       assessmentData,
