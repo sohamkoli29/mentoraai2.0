@@ -6,13 +6,9 @@ function StartJourneyButton({ onStartAssessment }) {
   const { user } = useContext(AuthContext);
 
   const handleClick = () => {
-    if (user) {
-      console.log('Starting stream assessment from StartJourneyButton');
+  
       onStartAssessment("stream");
-    } else {
-      // Dispatch event to open the global auth modal
-      window.dispatchEvent(new CustomEvent('openLoginModal'));
-    }
+ 
   };
 
   return (
@@ -27,3 +23,15 @@ function StartJourneyButton({ onStartAssessment }) {
 }
 
 export default StartJourneyButton;
+
+
+
+
+// auth funtion
+//  if (user) {
+//       console.log('Starting stream assessment from StartJourneyButton');
+//       onStartAssessment("stream");
+//     } else {
+//       // Dispatch event to open the global auth modal
+//       window.dispatchEvent(new CustomEvent('openLoginModal'));
+//     }
